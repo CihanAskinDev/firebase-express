@@ -7,7 +7,10 @@ export async function getAllCandy(req, res) {
     try {
         const allCandy = await coll.get();
 res.send(toArray(allCandy));
-res.status(500).send(err);
+    }
+    catch{
+        res.status(500).send(err);
+
     }
 }
 
