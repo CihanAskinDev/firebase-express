@@ -17,10 +17,22 @@ res.send(toArray(allCandy));
 
 export async function addNewCandy(req, res) {
     try {
-        const addNewCandy = req.body;
+        const NewCandy = req.body;
         await coll.add(NewCandy);
         getAllCandy(req, res);
     } catch(err) {
         res.status(500).send(err);
+    }
+}
+
+export async function updateCandyById(req, res) {
+    try {
+       // const candyId = req.params.candyId
+       const { candyId } = req.params // which candy are we changing
+       const updatedInfo = req.body; //what changes are we making ( e.g. {price: 2.99})
+       await coll.doc(candyId).update(updatedInfo); //update the doc with new info
+       getAllCandy(req, res);
+    } catch(err) {
+        res.status(500).send(err)
     }
 }
